@@ -1,0 +1,42 @@
+#define KYBRD_ENC_CMD_SET_LED 0xED 
+#define KYBRD_CTRL_CMD_DISABLE 0xAD 
+#define KYBRD_CTRL_CMD_ENABLE 0xAE
+#define KYBRD_CTRL_CMD_SELF_TEST 0xAA
+#define KYBRD_CTRL_CMD_WRITE_OUT_PORT 0xFE
+
+#ifdef __KBD__
+	int keyboard_status;
+	int caps;
+#endif
+
+enum KYBRD_ENCODER_IO {
+ 
+	KYBRD_ENC_INPUT_BUF	=	0x60,
+	KYBRD_ENC_CMD_REG	=	0x60
+};
+ 
+enum KYBRD_CTRL_IO {
+ 
+	KYBRD_CTRL_STATS_REG	=	0x64,
+	KYBRD_CTRL_CMD_REG	=	0x64
+};
+
+enum KYBRD_CTRL_STATS_MASK {
+ 
+	KYBRD_CTRL_STATS_MASK_OUT_BUF	=	1,		//00000001
+	KYBRD_CTRL_STATS_MASK_IN_BUF	=	2,		//00000010
+	KYBRD_CTRL_STATS_MASK_SYSTEM	=	4,		//00000100
+	KYBRD_CTRL_STATS_MASK_CMD_DATA	=	8,		//00001000
+	KYBRD_CTRL_STATS_MASK_LOCKED	=	0x10,		//00010000
+	KYBRD_CTRL_STATS_MASK_AUX_BUF	=	0x20,		//00100000
+	KYBRD_CTRL_STATS_MASK_TIMEOUT	=	0x40,		//01000000
+	KYBRD_CTRL_STATS_MASK_PARITY	=	0x80		//10000000
+};
+
+void kkybrd_disable();
+void kkybrd_enable();
+void kkybrd_reset_system();
+void onKeyClick();
+void kkybrd_set_leds(int, int, int);
+
+
